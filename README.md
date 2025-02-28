@@ -17,5 +17,5 @@ Este é um projeto de lista de tarefas desenvolvido com Django, permitindo a cri
 
 1. Clone este repositório:
    ```sh
-   git clone https://github.com/seu-usuario/todo-list-django.git
-   cd todo-list-django
+   git clone https://github.com/lucas-albuq/ToDoList.git
+   cd ToDoList
