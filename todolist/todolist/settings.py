@@ -104,6 +104,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'tarefas.Usuario'
+
+AUTHENTICATION_BACKENDS = [
+    'tarefas.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

@@ -8,11 +8,16 @@ class Tarefa(models.Model):
         ('em andamento', 'Em Andamento'),
         ('concluido', 'Concluído'),
     ]
+    PRIORIDADE_CHOICES = [
+        (1, 'Baixa'),
+        (2, 'Média'),
+        (3, 'Alta'),
+    ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     descricao = models.CharField(max_length=200)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='pendente')
-    prioridade = models.SmallIntegerField(null=True, blank=True)  # Pode ser 1, 2, 3...
+    prioridade = models.SmallIntegerField(null=True, choices=PRIORIDADE_CHOICES, blank=True) 
     prazo = models.DateField(null=True, blank=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
