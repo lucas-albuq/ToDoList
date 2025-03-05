@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import warnings
+from oauthlib.oauth2 import LegacyApplicationClient, OAuth2Token
+from requests_oauthlib import OAuth2Session
 
 load_dotenv()
 
@@ -31,6 +34,9 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
+
+# Desativa a verificação de transporte seguro (apenas para desenvolvimento)
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 # Application definition
 
@@ -110,6 +116,10 @@ AUTHENTICATION_BACKENDS = [
     'tarefas.backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+GOOGLE_OAUTH2_CLIENT_ID = os.getenv('GOOGLE_OAUTH2_CLIENT_ID')
+GOOGLE_OAUTH2_CLIENT_SECRET = os.getenv('GOOGLE_OAUTH2_CLIENT_SECRET')
+GOOGLE_OAUTH2_REDIRECT_URI = os.getenv('GOOGLE_OAUTH2_REDIRECT_URI')
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

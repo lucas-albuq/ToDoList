@@ -23,7 +23,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nome = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=255) 
+    google_id = models.CharField(max_length=100, blank=True, null=True)
     foto_perfil = models.CharField(max_length=300, blank=True, null=True)
 
     is_active = models.BooleanField(default=True)
