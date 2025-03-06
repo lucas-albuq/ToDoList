@@ -1,3 +1,21 @@
+# Ignorar arquivos de media
+.media
+media/*
+*/media/
+**/media/
+media/
+/media
+/media/
+
+# Ignorar arquivos de migração
+.migrations
+migrations/*
+*/migrations/
+**/migrations/
+migrations/
+/migrations
+/migrations/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
