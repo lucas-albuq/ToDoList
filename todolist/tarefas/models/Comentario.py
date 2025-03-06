@@ -9,3 +9,4 @@ class Comentario(models.Model):
     modificado_em = models.DateTimeField(auto_now=True)
     tarefa = models.ForeignKey(Tarefa, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    

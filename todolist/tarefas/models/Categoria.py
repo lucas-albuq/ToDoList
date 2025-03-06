@@ -7,3 +7,6 @@ class Categoria(models.Model):
     nome = models.CharField(max_length=50)
     cor = models.CharField(max_length=7)  # HEX "#RRGGBB"
     equipe = models.ForeignKey(Equipe, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.nome} - {self.equipe.nome}"

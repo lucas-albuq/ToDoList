@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes da Equipe - {{ equipe.nome }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">{{ equipe.nome }}</h1>
+    <p class="text-center">{{ equipe.descricao|default:"Sem descrição disponível" }}</p>
+
+    <a href="{% url 'home' %}" class="btn btn-secondary">Voltar à Página Inicial</a>
+</div>
+{% endblock %}

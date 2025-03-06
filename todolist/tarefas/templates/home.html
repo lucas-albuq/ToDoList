@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial - ToDo List{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        {% if user.is_authenticated %}
+            <h2 class="text-center mt-5">Equipes Associadas</h2>
+            <div class="row">
+                {% for equipe in equipes %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ equipe.nome }}</h5>
+                                <p class="card-text">{{ equipe.descricao|default:"Sem descrição disponível" }}</p>
+                                <a href="{% url 'equipe_detalhes' equipe.id %}" class="btn btn-primary">Acessar Equipe</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="text-center">Você ainda não pertence a nenhuma equipe.</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

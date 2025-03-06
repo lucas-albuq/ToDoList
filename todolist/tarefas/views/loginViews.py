@@ -4,6 +4,9 @@ from django.contrib import messages
 from tarefas.models import Usuario
 from requests_oauthlib import OAuth2Session
 from django.conf import settings
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+import re
 
 def cadastro(request):
     if request.user.is_authenticated:
@@ -28,6 +31,29 @@ def cadastro(request):
             messages.error(request, "Email já cadastrado.")
             return render(request, 'auth/cadastro.html', {'nome': nome, 'email': email})
 
+        if len(senha) < 8:
+            messages.error(request, "A senha deve ter pelo menos 8 caracteres.")
+            return render(request, 'auth/cadastro.html', {'nome': nome, 'email': email})
+
+        if not re.search(r'[A-Z]', senha):
+            messages.error(request, "A senha deve conter pelo menos uma letra maiúscula.")
+            return render(request, 'auth/cadastro.html', {'nome': nome, 'email': email})
+
+        if not re.search(r'[a-z]', senha):
+            messages.error(request, "A senha deve conter pelo menos uma letra minúscula.")
+            return render(request, 'auth/cadastro.html', {'nome': nome, 'email': email})
+
+        if not re.search(r'\d', senha):
+            messages.error(request, "A senha deve conter pelo menos um número.")
+            return render(request, 'auth/cadastro.html', {'nome': nome, 'email': email})
+
+        try:
+            validate_password(senha)
+        except ValidationError as e:
+            for error in e.messages:
+                messages.error(request, error)
+            return render(request, 'auth/cadastro.html', {'nome': nome, 'email': email})
+
         usuario = Usuario(email=email, nome=nome)
         usuario.set_password(senha)
         usuario.save()
@@ -37,8 +63,9 @@ def cadastro(request):
 
     return render(request, 'auth/cadastro.html')
 
+
 def login_view(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and 'logout' not in request.GET:
         messages.info(request, "Você já está logado!")
         return redirect('home')
 
@@ -63,7 +90,10 @@ def login_view(request):
     return render(request, 'auth/login.html')
 
 def logout_view(request):
+    storage = messages.get_messages(request)
+    storage.used = True
     logout(request)
+    messages.info(request, "Você saiu com sucesso.")
     return redirect('login')
 
 def google_login(request):

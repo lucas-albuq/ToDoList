@@ -24,7 +24,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     nome = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     google_id = models.CharField(max_length=100, blank=True, null=True)
-    foto_perfil = models.CharField(max_length=300, blank=True, null=True)
+    foto_perfil = models.ImageField(null=True, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -35,7 +35,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["nome"]
 
     def __str__(self):
-        return self.email
+        return f'{self.nome} - {self.email}'
 
 class UsuarioEquipe(models.Model):
     CARGO_CHOICES = [
@@ -49,3 +49,6 @@ class UsuarioEquipe(models.Model):
 
     class Meta:
         unique_together = ('usuario', 'equipe')
+
+    def __str__(self):
+        return f"{self.usuario.email} - {dict(self.CARGO_CHOICES).get(self.cargo)} - {self.equipe.nome}"
