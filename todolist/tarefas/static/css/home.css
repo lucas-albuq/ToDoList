@@ -1,0 +1,36 @@
+.header-equipe{
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-top: -2rem;
+}
+.header-equipe .perfil-equipe{
+    max-width: 60px;
+    border-radius: 50%;
+    border: 1px solid var(--light-gray);
+}
+.card-body{
+    margin-top: -2rem;
+    z-index: 3;
+    background-color: var(--white);
+    border-radius: 0 0 20px 20px;
+}
+.capa-equipe{
+    border-radius: 20px 20px 0 0;
+    z-index: 1;
+}
+.card{
+    border-radius: 20px;
+    height: 100%;
+}
+.equipe{
+    width: 20em;
+}
+.card-text{
+    margin-top: 1rem; 
+    overflow: hidden;           
+    text-overflow: ellipsis;       
+    display: -webkit-box;        
+    -webkit-line-clamp: 3;       
+    -webkit-box-orient: vertical; 
+}

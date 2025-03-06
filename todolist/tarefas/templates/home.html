@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Página Inicial - ToDo List{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div >
         {% if user.is_authenticated %}
-            <h2 class="text-center mt-5">Equipes Associadas</h2>
+            <h2>Equipes Associadas</h2>
             <div class="row">
                 {% for equipe in equipes %}
-                    <div class="col-md-4 mb-4">
+                    <div class="equipe">
                         <div class="card">
+                            <img src="{% if equipe.foto_capa %}media/{{ equipe.foto_capa }}{% else %} {% static 'assets/team_profile_placeholder.png' %}{% endif %}" class="capa-equipe" alt="">
                             <div class="card-body">
-                                <h5 class="card-title">{{ equipe.nome }}</h5>
+                                <div class="header-equipe">
+                                    <img src="{% if equipe.foto_perfil %}media/{{ equipe.foto_perfil }}{% else %} {% static 'assets/team_profile_placeholder.png' %} {% endif %}" class="perfil-equipe" alt="">
+                                    <a href="{% url 'equipe_detalhes' equipe.id %}"><h5 class="card-title">{{ equipe.nome }}</h5></a>                                    
+                                </div>
                                 <p class="card-text">{{ equipe.descricao|default:"Sem descrição disponível" }}</p>
-                                <a href="{% url 'equipe_detalhes' equipe.id %}" class="btn btn-primary">Acessar Equipe</a>
                             </div>
                         </div>
                     </div>

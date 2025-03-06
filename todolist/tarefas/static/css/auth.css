@@ -14,6 +14,10 @@ main{
     width: 100%;
     max-width: 400px;
 }
+h2 {
+    text-align: center;
+    color: var(--primary-color);
+}
 .google-btn {
     display: flex;
     justify-content: center;

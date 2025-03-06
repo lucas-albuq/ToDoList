@@ -13,7 +13,7 @@
 </head>
 <body>
     <header class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
+        <div>
             <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'assets/logo.svg' %}" alt=""></a>
    
             <nav>
@@ -21,7 +21,7 @@
                     {% if user.is_authenticated %}
                         <div class="dropdown">
                             <a class="nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ user.foto_perfil|default:'/static/assets/profile-placeholder.png' }}" alt="Foto de Perfil" class="rounded-circle profile-img">
+                                <img src="{% if user.foto_perfil %}/media/{{ user.foto_perfil }}{% else %}media/static/assets/profile-placeholder.png{% endif %}" alt="Foto de Perfil" class="rounded-circle profile-img">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
@@ -35,15 +35,27 @@
             </nav>
         </div>
     </header>
-
-    <main class="container mt-5 mb-5">
-        {% block content %}
-        {% endblock %}
-    </main>
+    <div class="main">
+        {% if user.is_authenticated %}
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Página Inicial</a></li>
+                    <li><a href="#">Tarefas</a></li>
+                    <li><a href="#">Equipes</a></li>
+                </ul>
+            </nav>
+        </aside>
+        {% endif %}
+        <main class="mt-5 mb-5">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 ToDo List. Todos os direitos reservados.</p>
+            <p>&copy; 2025 Centro de Soluções Aplicadas. Todos os direitos reservados.</p>
         </div>
     </footer>
 
