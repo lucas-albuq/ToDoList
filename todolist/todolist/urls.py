@@ -26,5 +26,5 @@ urlpatterns = [
 
     path('', views.home, name='home'),
     path('auth/', include('tarefas.urls.loginUrls')),
-    path('auth/', include('tarefas.urls.equipeUrls')),
+    path('equipe/', include('tarefas.urls.equipeUrls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

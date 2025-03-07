@@ -171,3 +171,7 @@ aside{
     min-height: 100%;
     min-width: 15em;
 }
+.dropdown-item:active{
+    background: none;
+    color: var(--dark-gray);
+}

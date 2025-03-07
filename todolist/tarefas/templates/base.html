@@ -21,7 +21,7 @@
                     {% if user.is_authenticated %}
                         <div class="dropdown">
                             <a class="nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{% if user.foto_perfil %}/media/{{ user.foto_perfil }}{% else %}media/static/assets/profile-placeholder.png{% endif %}" alt="Foto de Perfil" class="rounded-circle profile-img">
+                                <img src="{% if user.foto_perfil %}/media/{{ user.foto_perfil }}{% else %}static/assets/profile-placeholder.png{% endif %}" alt="Foto de Perfil" class="rounded-circle profile-img">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" href="#">Meu Perfil</a></li>

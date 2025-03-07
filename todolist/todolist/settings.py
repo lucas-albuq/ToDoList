@@ -32,7 +32,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'default_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS]
+print(ALLOWED_HOSTS)
 
 
 # Desativa a verificação de transporte seguro (apenas para desenvolvimento)
